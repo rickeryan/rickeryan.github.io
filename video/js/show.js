@@ -8,7 +8,7 @@
     $("#footer-container").load("./common/footer.html");
     var baseUrl = common.apiBase[0].url
     var proxyUrl =common.apiProxy[1].url
-    var vodType=2
+    var vodType=3
     var vodClass = ""
     var vodArea = ""
     var vodYear = ""
