@@ -1,104 +1,99 @@
-(function () {
+var from="qq"
 
-  // 加载头部和底部
-  $("#header-container").load("./common/header.html", function (response, status, request) {
-    this; // dom element
-    common.header.bindEvent()
-  });
-  $("#footer-container").load("./common/footer.html");
+var jqSearchBox=$("#search-box")
+var jqSearchBtn=$("#search-btn")
+var jqVodList=$("#vod-list")
+var jqVodListBone=$("#vod-list-bone")
+var jqVodListTitle=$("#vod-list-title")
 
-  var baseUrl = common.apiBase[0].url
-  var proxyUrl = common.apiProxy[1].url
+$(function(){
+    bindEvent()
+    getVods(from)
+})
 
-  /**
-   * 在redy中处理动态内容
-   * 防止浏览器前进返回时内容丢失
-   */
-  $(function () {
-    getHotVod()
-  });
-
-
-  function getHotVod() {
-
-    var hotVodSessonStr = sessionStorage.getItem("vod_hot")
-    if (hotVodSessonStr) {
-      var hotVod = JSON.parse(hotVodSessonStr)
-      console.log("get hotVod from session")
-      renderHotVod(hotVod)
+function bindEvent(){
+    $("#nav-list button").click(function (e) { 
+        e.preventDefault();
+        var jqSelected=$(this)
+        from = jqSelected.attr("id")
+        var selectedClass="bg-indigo-500"
+        jqSelected.siblings("button").removeClass(selectedClass)
+        jqSelected.addClass(selectedClass)
+        var wd = jqSearchBox.val().trim()
+        if(wd==""){
+            getVods(from)
+        }else{
+            search(from,wd)
+        }
+    });
+    jqSearchBtn.click(function(e){
+        e.preventDefault();
+        var wd=jqSearchBox.val()
+        if(wd.trim()==""){
+            alert("请输入影片名！")
+            return false
+        }
+        search(from,wd)
+    })
+    
+}
+function getVods(from){
+    jqVodListTitle.html("最近更新")
+    jqVodList.hide()
+    jqVodListBone.show()
+    var vodSessonStr = sessionStorage.getItem(from)
+    if (vodSessonStr) {
+      var vodList = JSON.parse(vodSessonStr)
+      console.log("get vods from session")
+      renderVods(vodList)
+      jqVodList.show()
+      jqVodListBone.hide()
       return
     }
 
     $.ajax({
       type: "get",
-      url: proxyUrl + baseUrl + "/vodPhbAll",
+      url: common.proxyUrl + common.apiBase[from] + "?ac=list",
       success: function (response) {
         if (typeof response == "string") {
           response = JSON.parse(response)
         }
-        var hotVod = response.data.list
-        sessionStorage.setItem("vod_hot", JSON.stringify(hotVod))
-        console.log("get hotVod from server")
-        renderHotVod(hotVod)
+        var vodList = response.list
+        sessionStorage.setItem(from, JSON.stringify(vodList))
+        console.log("get vods from server")
+        renderVods(vodList)
+        
+        jqVodListBone.hide()
+        jqVodList.show()
       }
     });
+}
 
-    function renderHotVod(data) {
-      $.get("../template/vodCard.tpl", function (res, textStatus, jqXHR) {
-        template.defaults.imports.proxyUrl = proxyUrl
-        template.defaults.imports.router = common.router
-        var render = template.compile(res)
+function renderVods(data){
+    
+    var jqVodList=$("#vod-list")
+    template.defaults.imports.router=common.router
+    template.defaults.imports.from=from
+    var vodHtml = template("vod-list-tpl",data)
+    jqVodList.html(vodHtml)
+}
 
-        var tencentList = data[0].vod_list
-        var jqTencent = $("#tencent")
-        jqTencent.html("")
-        for (var i = 0; i < tencentList.length; i++) {
-          var html = render(tencentList[i])
-          jqTencent.append(html)
+function search(from,wd){
+    jqVodListTitle.html("与 \""+wd+"\" 相关的影片")
+    jqVodList.hide()
+    jqVodListBone.show()
+    $.ajax({
+        type: "get",
+        url: common.proxyUrl + common.apiBase[from] + "?ac=list$wd="+wd,
+        success: function (response) {
+            if (typeof response == "string") {
+                response = JSON.parse(response)
+              }
+              var vodList = response.list
+              renderVods(vodList)
+              jqVodListBone.hide()
+              jqVodList.show()
         }
+    });
 
-        var iqiyiList = data[1].vod_list
-        var jqIqiyi = $("#iqiyi")
-        jqIqiyi.html("")
-        for (var i = 0; i < iqiyiList.length; i++) {
-          var html = render(iqiyiList[i])
-          jqIqiyi.append(html)
-        }
-
-        var youkuList = data[2].vod_list
-        var jqYouku = $("#youku")
-        jqYouku.html("")
-        for (var i = 0; i < youkuList.length; i++) {
-          var html = render(youkuList[i])
-          jqYouku.append(html)
-        }
-
-        var mangguoList = data[0].vod_list
-        jqMangguo = $("#mangguo")
-        jqMangguo.html("")
-        for (var i = 0; i < mangguoList.length; i++) {
-          var html = render(mangguoList[i])
-          jqMangguo.append(html)
-        }
-
-
-      }
-      );
-
-    }
-  };
-
-
-
-
-
-})();
-
-
-
-
-
-
-
-
-
+}
