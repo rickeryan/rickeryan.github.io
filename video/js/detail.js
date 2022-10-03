@@ -49,6 +49,9 @@ function getQuery() {
     if (query.f && query.v) {
         from = query.f
         vodId = query.v
+        if(query.i){
+            currentEpisodes=query.i
+        }
         return true
     } else {
         return false
@@ -69,9 +72,17 @@ function getDetail(from, id) {
             }
 
             var vod = response.list[0]
+            // 移除剧情中的p标签
+            var content =vod.vod_content
+            content = content.replace("<p>","")
+            content = content.replace("</p>","")
+            vod.vod_content=content
             document.title = "正在播放 - " + vod.vod_name
+            // 渲染剧集
             renderPlayList(vod)
+            // 渲染详情
             rederDetail(vod)
+            // 刷新播放器
             refreshPlayer(vodUrls[currentEpisodes].url)
         }
     });
@@ -99,7 +110,6 @@ function renderPlayLines() {
         var jqSelected = $(this)
         var index = $("#line button").index(jqSelected)
         currentLine = index
-        console.log(currentLine)
         var enableClass = "border-b-2 border-indigo-500"
         jqSelected.siblings("button").removeClass(enableClass)
         jqSelected.addClass(enableClass)
@@ -116,7 +126,7 @@ function refreshPlayer(url) {
     if (url) {
         var playLines = common.playLines
         var playUrl = playLines[currentLine].url + url
-        var frameStr = '<iframe allowtransparency=true frameborder="0" scrolling="no" allowfullscreen=true allowtransparency=true style="height:100%;width:100%" src="' + playUrl + '"></iframe>'
+        var frameStr = '<iframe title="player" allowtransparency=true frameborder="0" scrolling="no" allowfullscreen=true allowtransparency=true style="height:100%;width:100%" src="' + playUrl + '"></iframe>'
         $("#player").html(frameStr)
     }
 }

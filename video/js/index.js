@@ -26,6 +26,16 @@ function bindEvent(){
             search(from,wd)
         }
     });
+    jqSearchBox.keydown(function (e) { 
+        var wd=jqSearchBox.val()
+        if(e.keyCode=="13"){
+            if(wd.trim()==""){
+                alert("请输入影片名！")
+                return false
+            }
+            search(from,wd)
+        }
+    });
     jqSearchBtn.click(function(e){
         e.preventDefault();
         var wd=jqSearchBox.val()

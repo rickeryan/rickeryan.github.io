@@ -11,9 +11,9 @@
         "xigua": "http://103.222.188.156:99/rongxingapi.php/provide/vod/from/xigua",
     }
     var playLines = [
-        { "name": "主线路", "url": "https://jx.bozrc.com:4433/player/?url=", "mobile": 1 },
-        { "name": "备用一", "url": "https://jsap.attakids.com/?url=", "mobile": 1 },
-        { "name": "备用二", "url": "https://jx.dj6u.com/?url=", "mobile": 1 },
+        { "name": "主线路", "url": "https://jx.zui.cm/?url=", "mobile": 1 },
+        { "name": "备用一", "url": "https://jx.bozrc.com:4433/player/?url=", "mobile": 1 },
+        { "name": "备用二", "url": "https://jsap.attakids.com/?url=", "mobile": 1 },
         { "name": "备用三", "url": "https://jx.4kdv.com/?url=", "mobile": 1 },
     ]
 
