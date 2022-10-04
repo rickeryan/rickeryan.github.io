@@ -16,6 +16,7 @@ $(function () {
         alert("参数错误！")
         return false
     }
+    selectNav()
     bindEvent()
     renderPlayLines()
     getDetail(from,vodId)
@@ -57,6 +58,15 @@ function getQuery() {
         return false
     }
 }
+
+/**
+ * 选中当前导航菜单
+ */
+function selectNav(){
+    var selectedClass="bg-indigo-500"
+    $("#nav-list #"+from).addClass(selectedClass)
+}
+
 /**
  * 获取视频详情
  * @param { string} from 
