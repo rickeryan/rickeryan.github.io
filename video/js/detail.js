@@ -164,11 +164,11 @@ function renderPlayList(data) {
     // 渲染分集列表
     var jqEpisodes = $("#episodes")
     var endButton = "</button>"
-    var selectedTpl = '<button class="mt-4 mr-4 rounded bg-indigo-500 p-4 text-gray-50 shadow hover:bg-indigo-500 hover:text-gray-50">'
+    var selectedTpl = '<button class="mt-2 mr-2 rounded bg-indigo-500 p-2 text-gray-50 shadow hover:bg-indigo-500 hover:text-gray-50">'
     var firstItem = vodUrls[0]
     jqEpisodes.append(selectedTpl + firstItem.name + endButton)
 
-    var defaultTpl = '<button class="mt-4 mr-4 rounded p-4 shadow hover:bg-indigo-500 hover:text-gray-50">'
+    var defaultTpl = '<button class="mt-2 mr-2 rounded p-2 shadow hover:bg-indigo-500 hover:text-gray-50">'
     for (var i = 1; i < vodUrls.length; i++) {
         var item = vodUrls[i]
         jqEpisodes.append(defaultTpl + item.name + endButton)
