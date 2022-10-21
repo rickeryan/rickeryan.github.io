@@ -65,7 +65,7 @@ function bindEvent() {
         var wd = jqSearchBox.val()
         if (e.keyCode == "13") {
             if (wd.trim() == "") {
-                alert("请输入影片名！")
+                alert("请输入影片名！ ╮(╯3╰)╭ ")
                 return false
             }
             search(from, wd)
@@ -75,7 +75,7 @@ function bindEvent() {
         e.preventDefault();
         var wd = jqSearchBox.val()
         if (wd.trim() == "") {
-            alert("请输入影片名！")
+            alert("请输入影片名！ ╮(╯3╰)╭ ")
             return false
         }
         search(from, wd)

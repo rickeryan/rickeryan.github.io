@@ -23,7 +23,7 @@
     */
     $(function () {
         if ($.isEmptyObject(urlObj.query) || (!urlObj.query.v)) {
-            alert("未找到视频！")
+            alert("未找到视频！ ╮(╯3╰)╭ ")
             return
         }
 
@@ -99,12 +99,12 @@
         // 解析截取分集内容
         playUrls = data.vod_play_url.split("$$$")[0]
         if (!playUrls) {
-            alert("未找到播放地址!")
+            alert("未找到播放地址！ ╮(╯3╰)╭ ")
             return
         }
         playArray = playUrls.split("#")
         if (!playArray || playArray.length == 0) {
-            alert("未找到播放地址!")
+            alert("未找到播放地址！ ╮(╯3╰)╭ ")
             return
         }
         for (var i = 0; i < playArray.length; i++) {

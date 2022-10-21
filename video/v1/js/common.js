@@ -7,7 +7,7 @@
   function bindEvent(){
     $("#header-mode").click(function (e) { 
       e.preventDefault();
-      alert("暗夜模式尚未装载，请耐心等待！")
+      alert("暗夜模式尚未装载，请耐心等待！ ╮(╯3╰)╭ ")
     });
   }
   window.common.header = {

@@ -21,7 +21,7 @@
             jqSearchBtn.addClass("cursor-wait")
             getSearchRes(wd)
         } else{
-            alert("请输入影片名！")
+            alert("请输入影片名！ ╮(╯3╰)╭ ")
         }
     });
 

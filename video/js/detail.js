@@ -13,7 +13,7 @@ var jqDetail = $("#detail")
 
 $(function () {
     if (!getQuery()) {
-        alert("参数错误！")
+        alert("参数错误！ ╮(╯3╰)╭ ")
         return false
     }
     selectNav()
@@ -51,7 +51,7 @@ function getQuery() {
         from = query.f
         vodId = query.v
         if(query.i){
-            currentEpisodes=query.i
+            currentEpisodes= parseInt(query.i)
         }
         return true
     } else {
@@ -148,12 +148,12 @@ function renderPlayList(data) {
     // 解析截取分集内容
     playUrls = data.vod_play_url
     if (!playUrls) {
-        alert("未找到播放地址!")
+        alert("未找到播放地址！ ╮(╯3╰)╭ ")
         return
     }
     playArray = playUrls.split("#")
     if (!playArray || playArray.length == 0) {
-        alert("未找到播放地址!")
+        alert("未找到播放地址！ ╮(╯3╰)╭ ")
         return
     }
     for (var i = 0; i < playArray.length; i++) {
@@ -165,13 +165,14 @@ function renderPlayList(data) {
     var jqEpisodes = $("#episodes")
     var endButton = "</button>"
     var selectedTpl = '<button class="mt-2 mr-2 rounded bg-indigo-500 p-2 text-gray-50 shadow hover:bg-indigo-500 hover:text-gray-50">'
-    var firstItem = vodUrls[0]
-    jqEpisodes.append(selectedTpl + firstItem.name + endButton)
-
     var defaultTpl = '<button class="mt-2 mr-2 rounded p-2 shadow hover:bg-indigo-500 hover:text-gray-50">'
-    for (var i = 1; i < vodUrls.length; i++) {
+    for (var i = 0; i < vodUrls.length; i++) {
         var item = vodUrls[i]
-        jqEpisodes.append(defaultTpl + item.name + endButton)
+        if(i==currentEpisodes){
+            jqEpisodes.append(selectedTpl + item.name + endButton)
+        }else{
+            jqEpisodes.append(defaultTpl + item.name + endButton)
+        }
     }
 
     // 剧集点击事件
@@ -181,16 +182,21 @@ function renderPlayList(data) {
         var jqSelected = $(this)
         var index = $("#episodes button").index(jqSelected)
         currentEpisodes = index
-        var enableClass = "bg-indigo-500 text-gray-50"
-        jqSelected.siblings("button").removeClass(enableClass)
-        jqSelected.addClass(enableClass)
-        refreshPlayer(vodUrls[currentEpisodes].url)
+        // 链接添加剧集参数后，点击直接跳转到新页面
+        location.href = "detail.html?f=" 
+            + common.router.encode(from) 
+            + "&v=" + common.router.encode(vodId)
+            + "&i=" + common.router.encode(currentEpisodes.toString());
+        // var enableClass = "bg-indigo-500 text-gray-50"
+        // jqSelected.siblings("button").removeClass(enableClass)
+        // jqSelected.addClass(enableClass)
+        // refreshPlayer(vodUrls[currentEpisodes].url)
     });
     //上一集点击
     $("#pre").click(function (e) {
         e.preventDefault();
         if (currentEpisodes <= 0) {
-            alert("已经是第一集啦")
+            alert("已经是第一集啦！ ╮(╯3╰)╭ ")
             return false
         }
         var cIndex = currentEpisodes - 1
@@ -200,7 +206,7 @@ function renderPlayList(data) {
     $("#next").click(function (e) {
         e.preventDefault();
         if (currentEpisodes >= vodUrls.length - 1) {
-            alert("已经是最后一集啦")
+            alert("已经是最后一集啦！ ╮(╯3╰)╭ ")
             return false
         }
         var cIndex = currentEpisodes + 1
