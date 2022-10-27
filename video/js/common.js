@@ -1,14 +1,14 @@
 (function () {
-    var proxyUrl = "https://vodproxy.rickeryan.repl.co?url="
+    var proxyUrl = "http://vod.918848.xyz/rongxingapi.php/provide/vod"
     var apiBase = {
-        "qq": "http://103.222.188.156:99/rongxingapi.php/provide/vod/from/qq",
-        "bilibili": "http://103.222.188.156:99/rongxingapi.php/provide/vod/from/bilibili",
-        "youku": "http://103.222.188.156:99/rongxingapi.php/provide/vod/from/youku",
-        "iqiyi": "http://103.222.188.156:99/rongxingapi.php/provide/vod/from/qiyi",
-        "mgtv": "http://103.222.188.156:99/rongxingapi.php/provide/vod/from/mgtv",
-        "souhu": "http://103.222.188.156:99/rongxingapi.php/provide/vod/from/sohu",
-        "pptv": "http://103.222.188.156:99/rongxingapi.php/provide/vod/from/pptv",
-        "xigua": "http://103.222.188.156:99/rongxingapi.php/provide/vod/from/xigua",
+        "qq": "/from/qq",
+        "bilibili": "/from/bilibili",
+        "youku": "/from/youku",
+        "iqiyi": "/from/qiyi",
+        "mgtv": "/from/mgtv",
+        "souhu": "/from/sohu",
+        "pptv": "/from/pptv",
+        "xigua": "/from/xigua",
     }
     var playLines = [
         { "name": "主线路", "url": "https://jx.zui.cm/?url=", "mobile": 1 },
