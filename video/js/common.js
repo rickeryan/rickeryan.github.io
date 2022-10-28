@@ -1,5 +1,5 @@
 (function () {
-    var proxyUrl = "http://vod.918848.xyz/rongxingapi.php/provide/vod"
+    var proxyUrl = "//vod.918848.xyz/rongxingapi.php/provide/vod"
     var apiBase = {
         "qq": "/from/qq",
         "bilibili": "/from/bilibili",
