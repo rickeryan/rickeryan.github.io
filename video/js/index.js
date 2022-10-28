@@ -129,7 +129,7 @@ function search(from, wd) {
     jqVodListBone.show()
     $.ajax({
         type: "get",
-        url: common.proxyUrl + common.apiBase[from] + "?ac=list$wd=" + wd,
+        url: common.proxyUrl + common.apiBase[from] + "?ac=list&wd=" + wd,
         success: function (response) {
             if (typeof response == "string") {
                 response = JSON.parse(response)

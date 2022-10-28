@@ -75,7 +75,7 @@ function selectNav(){
 function getDetail(from, id) {
     $.ajax({
         type: "get",
-        url: common.proxyUrl + common.apiBase[from] + "?ac=detail$ids=" + id,
+        url: common.proxyUrl + common.apiBase[from] + "?ac=detail&ids=" + id,
         success: function (response) {
             if (typeof response == "string") {
                 response = JSON.parse(response)
