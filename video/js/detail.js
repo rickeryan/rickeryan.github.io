@@ -218,7 +218,7 @@ function renderPlayList(data) {
  * @param {object} data 
  */
 function rederDetail(data){
-    template.defaults.imports.proxyUrl=common.proxyUrl
+    // template.defaults.imports.proxyUrl=common.proxyUrl
     var vodHtml = template("vod-detail-tpl",data)
     jqDetail.html(vodHtml)
 }
