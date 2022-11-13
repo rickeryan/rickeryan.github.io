@@ -87,7 +87,7 @@ function getDetail(from, id) {
             content = content.replace("<p>","")
             content = content.replace("</p>","")
             vod.vod_content=content
-            document.title = vod.vod_name + " 第" + (currentEpisodes+1) + "集"
+            document.title = vod.vod_name
             // 渲染剧集
             renderPlayList(vod)
             // 渲染详情
@@ -134,6 +134,7 @@ function renderPlayLines() {
  */
 function refreshPlayer(url) {
     if (url) {
+        document.title = document.title + "-" + vodUrls[currentEpisodes].name
         var playLines = common.playLines
         var playUrl = playLines[currentLine].url + url
         var frameStr = '<iframe title="player" allowtransparency=true frameborder="0" scrolling="no" allowfullscreen=true allowtransparency=true style="height:100%;width:100%" src="' + playUrl + '"></iframe>'
