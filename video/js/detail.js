@@ -87,7 +87,7 @@ function getDetail(from, id) {
             content = content.replace("<p>","")
             content = content.replace("</p>","")
             vod.vod_content=content
-            document.title = "正在播放 - " + vod.vod_name
+            document.title = vod.vod_name + " 第" + (currentEpisodes+1) + "集"
             // 渲染剧集
             renderPlayList(vod)
             // 渲染详情
